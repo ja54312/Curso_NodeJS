@@ -2,9 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@database": [
-        "database/db.ts"
-      ]
+      "@database": ["database/db.ts"],
+      "@cors":["cors-middleware"],
+      "@components/*":["components/*"]
     },
     "target": "es6",
     "lib": [
