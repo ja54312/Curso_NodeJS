@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
-
-const Home = () => {
-
-    const [productList,setProductList] = useState<TProduct[]>([])
-
-    useEffect(() => {
-        const getProducts = async() => {
-          const response = await fetch('api/avo')
-          const data = await response.json()
-          setProductList(data.data)
+export const getServerSideProps = async () => {
+       const response = await fetch('https://curso-node-js-xi.vercel.app/api/avo')
+       const {data:productList}: TAPIAvoResponse = await response.json()
+    return{
+        props: {
+            productList,
         }
-        getProducts()
-          .catch(console.error)  
-      }, [])
-            //console.log(productList[0],'lista')
+    }
+}
+
+
+const Home = ({productList}:{productList:TProduct[]}) => {
+
+            //console.log(productList,'lista')
     return(
         <>  
-            <div>Soy un home</div>
+            <div>Soy un home desde el server</div>
             {productList && productList.map((product)=>(
                 <div>{product.name}</div>
             ))} 
